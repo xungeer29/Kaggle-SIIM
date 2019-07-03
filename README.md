@@ -36,5 +36,6 @@
 | baseline | 0.8042 | epoch = 5 |
 | RandomColor | 0.7888 | down |
 | epoch: 5->20 | 0.8054 |  |
-| epoch:20, vertical_flip |  |  |
+| epoch:20, vertical_flip | 0.8043 | down |
+| epoch:20, rotation | 0.7988 | down |
 
