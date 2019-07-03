@@ -26,3 +26,15 @@
 * 肺部吸入与呼出空气使图像灰度直方图有两个峰值
 
   ![像素均值计算](./figs/histogram.png)
+  
+  
+## Experiment
+* Mask-RCNN
+
+| 方法 | 结果 | 备注 |
+| :------| ------: | :------: |
+| baseline | 0.8042 | epoch = 5 |
+| RandomColor | 0.7888 | down |
+| epoch: 5->20 | 0.8054 |  |
+| epoch:20, vertical_flip |  |  |
+
