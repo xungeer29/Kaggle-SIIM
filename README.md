@@ -29,9 +29,11 @@
   ![像素均值计算](./figs/histogram.png)
   
 * 数据集有10712张图像，但是只有10675张图像有标注，有mask的图像有3286张，大部分只有1个mask
+
   ![mask数量统计](./figs/nMasks.PNG)
   
 * mask占比
+
   ![](./figs/mask_coverage.PNG)
   
 ## Experiment
