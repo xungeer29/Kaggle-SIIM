@@ -16,6 +16,7 @@
   ```
  
 ## Kernel
+* [EDA](https://www.kaggle.com/unvirtual/eda-of-training-test-data/notebook):
 * [Image+Mask Augmentations--pytorch](https://www.kaggle.com/abhishek/image-mask-augmentations):图像分割的数据扩充方法
 * [dataset:DICOM + MASK+ PNG + FHIR](https://www.kaggle.com/anisayari/siimacrpneumothoraxsegmentationzip-dataset)：处理好的数据集，包含mask，png等
 * [First steps with SIIM-ACR Pneumothorax Data](https://www.kaggle.com/steubk/first-steps-with-siim-acr-pneumothorax-data/comments?scriptVersionId=16473604#The-bimodal-mean_pixel_value-distribution):数据分布的探索
@@ -27,6 +28,11 @@
 
   ![像素均值计算](./figs/histogram.png)
   
+* 数据集有10712张图像，但是只有10675张图像有标注，有mask的图像有3286张，大部分只有1个mask
+  ![mask数量统计](./figs/nMasks.png)
+  
+* mask占比
+  ![](./figs/mask_coverage.png)
   
 ## Experiment
 * Mask-RCNN
@@ -38,4 +44,4 @@
 | epoch: 5->20 | 0.8054 |  |
 | epoch:20, vertical_flip | 0.8043 | down |
 | epoch:20, rotation | 0.7988 | down |
-
+| epoch:20, clahe | 0.8043 | down |
