@@ -28,7 +28,7 @@
 
   ![像素均值计算](./figs/histogram.png)
   
-* 数据集有10712张图像，但是只有10675张图像有标注，有mask的图像有3286张，大部分只有1个mask
+* 数据集有10712张图像，但是只有10675张图像有标注，有mask的图像有2379张，大部分只有1个mask
 
   ![mask数量统计](./figs/nMasks.PNG)
   
@@ -42,8 +42,19 @@
 | 方法 | 结果 | 备注 |
 | :------| ------: | :------: |
 | baseline | 0.8042 | epoch = 5 |
-| RandomColor | 0.7888 | down |
+| RandomColor | 0.7888 | down | 
 | epoch: 5->20 | 0.8054 |  |
 | epoch:20, vertical_flip | 0.8043 | down |
 | epoch:20, rotation | 0.7988 | down |
 | epoch:20, clahe | 0.8043 | down |
+
+
+| 方法 | epoch | 结果 |
+| :------| ------: | :------: |
+| Mask-RCNN+HFlip | 5 | 0.8025 |
+| CLAHE | 5 | 0.8037 | 
+| VFlip | 5 | 0.8031 |
+| Freeze layer1 | 5 | 0.8037 |
+| Gradual Warmup LR | 10 |  |
+| Random Crop | 5 | down |
+| Random Crop | 5 | down |
