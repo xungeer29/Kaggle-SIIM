@@ -55,6 +55,6 @@
 | CLAHE | 5 | 0.8037 | 
 | VFlip | 5 | 0.8031 |
 | Freeze layer1 | 5 | 0.8037 |
-| Gradual Warmup LR | 10 |  |
+| Gradual Warmup LR | 10 | 0.8033 |
 | CLAHE+VFlip+Freeze Layer1+GWarmup LR+im_normalization | 20 | 0.8039 |
 | Random Crop | 5 | down |
