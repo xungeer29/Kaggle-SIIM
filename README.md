@@ -22,6 +22,7 @@
 * [First steps with SIIM-ACR Pneumothorax Data](https://www.kaggle.com/steubk/first-steps-with-siim-acr-pneumothorax-data/comments?scriptVersionId=16473604#The-bimodal-mean_pixel_value-distribution):数据分布的探索
 * [mask-rcnn with augmentation and multiple masks](https://www.kaggle.com/abhishek/mask-rcnn-with-augmentation-and-multiple-masks/notebook): pytorch mask-rcnn的训练， LB=0.8042
 * [Visualizing Submission File](https://www.kaggle.com/abhishek/visualizing-submission-file): 可视化mask
+* [Postprocessing for Hypercolumns kernel](https://www.kaggle.com/iafoss/postprocessing-for-hypercolumns-kernel-0-8286-lb): 模型训练完成后的后处理，包括置信度阈值的选择，mask大小阈值的选择，submission.csv中泄漏的信息的利用等
 
 ## Discover
 * 肺部吸入与呼出空气使图像灰度直方图有两个峰值
