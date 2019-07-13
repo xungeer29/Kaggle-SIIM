@@ -1,6 +1,7 @@
 # Kaggle-SIIM
 
 ## Discussion
+* [How to reach 0.8440 with single model](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/99440#573567): 有用的一些方法
 * [Dmytro Panchenko:How is metric calculated?](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97225#latest-563443):讲解指标的计算方式
 * [Heng CherKeng: starter kit](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97456#latest-563494): 收集各种分割的trcik并进行复现
 * [Previous segmentation challenges](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/96992#latest-563339):以前的分割竞赛 [Resources | Papers With (really good) Code](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97198#latest-561177)
