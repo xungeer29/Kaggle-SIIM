@@ -1,6 +1,7 @@
 # Kaggle-SIIM
 
 ## Discussion
+* [train on kaggle, test segmentation on ChestX-ray14 dataset](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/100085#577251): [Kaggle-ChestX-ray14](https://www.kaggle.com/c/ccc-chestx-ray14-multi-label-classication/overview)这个竞赛的数据集与SIIM的数据集可能是相同的，可能可以用来数据蒸馏，或者存在答案泄露
 * [How to reach 0.8440 with single model](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/99440#573567): 有用的一些方法
 * [Dmytro Panchenko:How is metric calculated?](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97225#latest-563443):讲解指标的计算方式
 * [Heng CherKeng: starter kit](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97456#latest-563494): 收集各种分割的trcik并进行复现
