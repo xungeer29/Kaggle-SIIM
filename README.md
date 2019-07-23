@@ -65,3 +65,11 @@
 | Gradual Warmup LR | 10 | 0.8033 |
 | CLAHE+VFlip+Freeze Layer1+GWarmup LR+im_normalization | 20 | 0.8039 |
 | Random Crop | 5 | down |
+
+## TODO
+* Hypercolumns
+* 梯度累加
+* [lovasz loss](https://github.com/bermanmaxim/LovaszSoftmax/blob/master/pytorch/lovasz_losses.py)
+* unet
+* bceloss
+* focal loss
