@@ -20,6 +20,7 @@ from train import train_one_epoch
 from validation import do_valid
 from test import inference, inference_all
 from models import DeepLabV3, ResNetUNet
+from radam import RAdam, PlainRAdam
 from dataset import SIIMDataset, do_split, SIIMDataset_all, BalanceClassSampler
 from loss import DiceLoss, Weight_Soft_Dice_Loss, BCELoss, Weight_BCELoss, FocalLoss, MixedLoss, Lovasz_Loss
 from config import config
@@ -92,6 +93,8 @@ params = [p for p in model_ft.parameters() if p.requires_grad]
 optimizer = torch.optim.SGD(params, lr=config.lr, momentum=0.9, weight_decay=0.0005)
 # optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model_ft.parameters()),lr=config.lr)
 # optimizer = torch.optim.RMSprop(params, lr=config.lr, alpha = 0.95)
+# optimizer = RAdam(params, lr=1e-3, betas=(0.9, 0.999), eps=1e-8, weight_decay=0)
+# optimizer = PlainRAdam(params, lr=1e-3, betas=(0.9, 0.999), eps=1e-8, weight_decay=0)
 if os.path.exists(config.init_optimizer):
     ckpt = torch.load(config.init_optimizer)
     optimizer.load_state_dict(ckpt['optimizer'])
