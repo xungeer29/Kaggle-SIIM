@@ -15,7 +15,7 @@ class DefaultConfigs(object):
 	seed = 2019
 	size = 512 # image size
 	num_epochs = 100
-	batch_size = 8 
+	batch_size = 5
 	num_workers = 0
 	lr = 0.00001
 
