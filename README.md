@@ -1,39 +1,29 @@
-# Kaggle-SIIM
+# [Kaggle-SIIM-ACR Pneumothorax Segmentation](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation)
+![](./figs/cover.PNG)
 
-## Discussion
-* [train on kaggle, test segmentation on ChestX-ray14 dataset](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/100085#577251): [Kaggle-ChestX-ray14](https://www.kaggle.com/c/ccc-chestx-ray14-multi-label-classication/overview)这个竞赛的数据集与SIIM的数据集可能是相同的，可能可以用来数据蒸馏，或者存在答案泄露
-* [How to reach 0.8440 with single model](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/99440#573567): 有用的一些方法
-* [Dmytro Panchenko:How is metric calculated?](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97225#latest-563443):讲解指标的计算方式
-* [Heng CherKeng: starter kit](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97456#latest-563494): 收集各种分割的trcik并进行复现
-* [Previous segmentation challenges](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/96992#latest-563339):以前的分割竞赛 [Resources | Papers With (really good) Code](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97198#latest-561177)
-* [Optimizing Dice is Harder than IoU](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97474#latest-563400): 讨论IoU是不是子模函数 [Yes, IoU loss is submodular – as a function of the mispredictions](https://arxiv.org/pdf/1809.01845.pdf) [INTERSECTION OVER UNION IS NOT A SUBMODULAR FUNCTION](https://arxiv.org/pdf/1809.00593.pdf)
-* [Heng CherKeng: baseline methods](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97518#latest-562789):包含肺部检测的论文和代码
-* [Timestamp in file names ?](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/discussion/97119#latest-562337):发现文件名是时间戳
-  ```python
-  from datetime import datetime
-  ts = 1517875163.537053
-  print(datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
+## Metric
+Dice coefficient
 
-  2018-02-05 23:59:23
-  ```
- 
-## Kernel
-* [EDA](https://www.kaggle.com/unvirtual/eda-of-training-test-data/notebook):
-* [Image+Mask Augmentations--pytorch](https://www.kaggle.com/abhishek/image-mask-augmentations):图像分割的数据扩充方法
-* [dataset:DICOM + MASK+ PNG + FHIR](https://www.kaggle.com/anisayari/siimacrpneumothoraxsegmentationzip-dataset)：处理好的数据集，包含mask，png等
-* [First steps with SIIM-ACR Pneumothorax Data](https://www.kaggle.com/steubk/first-steps-with-siim-acr-pneumothorax-data/comments?scriptVersionId=16473604#The-bimodal-mean_pixel_value-distribution):数据分布的探索
-* [mask-rcnn with augmentation and multiple masks](https://www.kaggle.com/abhishek/mask-rcnn-with-augmentation-and-multiple-masks/notebook): pytorch mask-rcnn的训练， LB=0.8042
-* [Visualizing Submission File](https://www.kaggle.com/abhishek/visualizing-submission-file): 可视化mask
-* [Postprocessing for Hypercolumns kernel](https://www.kaggle.com/iafoss/postprocessing-for-hypercolumns-kernel-0-8286-lb): 模型训练完成后的后处理，包括置信度阈值的选择，mask大小阈值的选择，submission.csv中泄漏的信息的利用等https://www.kaggle.com/giuliasavorgnan/pneumothorax-models-ensemble-average/data
-* [Pneumothorax Models Ensemble (average)](https://www.kaggle.com/giuliasavorgnan/pneumothorax-models-ensemble-average/data): 将不同方法的模型在结果层次集成的方法，但是目前还没有提升
-* [rather-silly-1am-ensemble](https://www.kaggle.com/konradb/rather-silly-1am-ensemble/notebook): 最简单的直接将csv文件融合的方法，将相同图片中有病灶的mask复制给无病灶的图片，将两个模型的预测结果融合，增加了mask的数量，可以提升一定的分数
-* [simple-data-augmentation-fastai](https://www.kaggle.com/anisayari/simple-data-augmentation-fastai): 使用fast.ai进行数据扩充
-* [align-lung-images-using-pre-trained-model](https://www.kaggle.com/bguberfain/align-lung-images-using-pre-trained-model): 使用其他比赛的预训练模型进行肺部检测，但是效果看起来不是很好
+![](./figs/metric.PNG)
 
-## Discover
+当预测值X与 Ground Truth Y 均为空时，dice=1
+
+## EDA
+* 样例图像
+
+   ![](./figs/fig1.PNG)
+   
+   ![](./figs/fig1.PNG)
+   
+   ![](./figs/fig1.PNG)
+   
+   mask 有较大的，也有较小的，也有分散的多个mask的，也有大量没有mask的
+   
 * 肺部吸入与呼出空气使图像灰度直方图有两个峰值
 
   ![像素均值计算](./figs/histogram.png)
+  
+  mean=0.49, std=0.249
   
 * 数据集有10712张图像，但是只有10675张图像有标注，有mask的图像有2379张，大部分只有1个mask
 
@@ -43,33 +33,76 @@
 
   ![](./figs/mask_coverage.PNG)
   
-## Experiment
-* Mask-RCNN
+  预测时过滤掉面积小于 75.0*(1024/128.0)\*\*2 的区域
+  
+## Data Augmentation
+* HorizontalFlip
+* CLAHE
+* CenterCrop (light) 
+* RandomContrast RandomGamma RandomBrightness
+* ElasticTransform GridDistortion OpticalDistortion
 
-| 方法 | 结果 | 备注 |
-| :------| ------: | :------: |
-| baseline | 0.8042 | epoch = 5 |
-| RandomColor | 0.7888 | down | 
-| epoch: 5->20 | 0.8054 |  |
-| epoch:20, vertical_flip | 0.8043 | down |
-| epoch:20, rotation | 0.7988 | down |
-| epoch:20, clahe | 0.8043 | down |
+## Model
+* UNet-ResNet34
+* DeepLabV3-ResNet50
+* upsample: [CARAFE]()
 
+  `CARAFE`: 一个轻量级通用上采样算子，增加少许计算量，使上采样变为可训练的模式，替换了`UNet`中的`bilinear`
+  
+  [知乎：CARAFE: 轻量级通用上采样算子](https://zhuanlan.zhihu.com/p/76063768)
+  
+## Optimizer
+* [RAdam](https://arxiv.org/abs/1908.03265)
+* SGD + Gradual_Warmup_LR_Scheduler
 
-| 方法 | epoch | 结果 |
-| :------| ------: | :------: |
-| Mask-RCNN+HFlip | 5 | 0.8025 |
-| CLAHE | 5 | 0.8037 | 
-| VFlip | 5 | 0.8031 |
-| Freeze layer1 | 5 | 0.8037 |
-| Gradual Warmup LR | 10 | 0.8033 |
-| CLAHE+VFlip+Freeze Layer1+GWarmup LR+im_normalization | 20 | 0.8039 |
-| Random Crop | 5 | down |
+## Loss
+* DiceLoss
+* Weight_Soft_Dice_Loss
+* BCELoss
+* MixedLoss (Focal Loss + Dice Loss)
+* Weight_BCELoss
+* Lovasz_Loss (for fine tuning)
 
-## TODO
-* Hypercolumns
-* 梯度累加
-* [lovasz loss](https://github.com/bermanmaxim/LovaszSoftmax/blob/master/pytorch/lovasz_losses.py)
-* unet
-* bceloss
-* focal loss
+## Others
+* Gradient Accumulation
+* Ensemble
+
+## RUN
+### ENVS
+* python = 3.5+
+* pytorch = 1.0+
+* torchvision = 0.3.0
+* albumentations = 0.3.0
+* visdom = 0.1.8.8
+
+### RUN
+* 下载项目
+
+  ```git
+  git clone https://github.com/xungeer29/Kaggle-SIIM
+  ```
+  
+* 切换路径
+
+  ```Linux
+  cd Kaggle-SIIM
+  ```
+  
+* 更改`config.py`中的数据路径
+* 启动`visdom`
+
+  ```linux
+  python -m visdom.server
+  ```
+  
+* train
+
+  ```linux
+  python main.py
+  ```
+
+* ensemble
+
+  ```linux
+  python ensemble.py
+  ```
