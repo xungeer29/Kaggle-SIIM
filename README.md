@@ -11,11 +11,11 @@ Dice coefficient
 ## EDA
 * 样例图像
 
-   ![](./figs/fig1.PNG)
+   ![](./figs/fig1.png)
    
-   ![](./figs/fig1.PNG)
+   ![](./figs/fig2.PNG)
    
-   ![](./figs/fig1.PNG)
+   ![](./figs/fig3.PNG)
    
    mask 有较大的，也有较小的，也有分散的多个mask的，也有大量没有mask的
    
