@@ -65,6 +65,7 @@ Dice coefficient
 
 ## Others
 * Gradient Accumulation
+* TTA
 * Ensemble
 
 ## RUN
