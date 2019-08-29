@@ -45,11 +45,13 @@ Dice coefficient
 ## Model
 * UNet-ResNet34
 * DeepLabV3-ResNet50
-* upsample: [CARAFE]()
+* upsample: [CARAFE](https://arxiv.org/abs/1905.02188)
 
   `CARAFE`: 一个轻量级通用上采样算子，增加少许计算量，使上采样变为可训练的模式，替换了`UNet`中的`bilinear`
   
   [知乎：CARAFE: 轻量级通用上采样算子](https://zhuanlan.zhihu.com/p/76063768)
+  
+  ![](./figs/carafe.PNG)
   
 ## Optimizer
 * [RAdam](https://arxiv.org/abs/1908.03265)
